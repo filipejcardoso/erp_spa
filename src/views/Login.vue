@@ -74,14 +74,14 @@ export default {
   
       this.axios.post(url, payload)
       .then(response => {
-		const records = response.data['records']
-		const token = response.data['token']
+		    const records = response.data['records']
+		    const token = response.data['token']
         const result = response.data['result']
         
         this.$store.commit('CHANGE_USUARIO', records)
         this.$store.commit('CHANGE_TOKEN', token)
 
-        alert('sucess')
+        this.$router.push('produtos')
 	})
     .catch(e => {
         alert('erro')
