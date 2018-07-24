@@ -18,6 +18,8 @@ Vue.use(VueAxios, axios);
 Vue.component('navbar',Navbar);
 
 Vue.config.productionTip = false
+axios.defaults.baseURL = process.env.API_URL
+
 
 const app = new Vue({
 	store,

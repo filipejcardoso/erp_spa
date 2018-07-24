@@ -22,14 +22,14 @@
 
                         <div class='row'>
                         <div class='input-field col s12'>
-                            <input class='validate' v-model="username" v-on:keyup.13="login()" type='text' name='username' id='username' />
+                            <input class='validate' v-model="user.username" v-on:keyup.13="login()" type='text' name='username' id='username' />
                             <label for='username'>Entre com seu usuário</label>
                         </div>
                         </div>
 
                         <div class='row'>
                         <div class='input-field col s12'>
-                            <input class='validate' v-model="password" v-on:keyup.13="login()" type='password' name='password' id='password' />
+                            <input class='validate' v-model="user.password" v-on:keyup.13="login()" type='password' name='password' id='password' />
                             <label for='password'>Entre com sua senha</label>
                         </div>
                         <label style='float: right;'>
@@ -62,30 +62,34 @@ export default {
   data()
   {
     return{
-      username:'',
-      password:''
+       user: {
+        username: null,
+        password: null
+      }
     }
   },
   methods: {
     login()
     {
       const url = `${process.env.API_URL}/auth/login`;
-      const payload = {"username":`${this.username}`,"password":`${this.password}`};
-  
+      const payload = {"username":`${this.user.username}`,"password":`${this.user.password}`};
+
       this.axios.post(url, payload)
       .then(response => {
-		    const records = response.data['records']
-		    const token = response.data['token']
+        const records = response.data['records']
+        const token = response.data['token']
         const result = response.data['result']
         
         this.$store.commit('CHANGE_USUARIO', records)
         this.$store.commit('CHANGE_TOKEN', token)
 
-        this.$router.push('produtos')
-	})
-    .catch(e => {
-        alert('erro')
-	})    
+        localStorage.setItem('token',token)
+
+        this.$router.push( '/dashboard' );
+      })
+      .catch(e => {
+          alert('erro')
+      })    
     }
   },
   created(){
