@@ -4,7 +4,7 @@ import Template from '@/views/Template.vue'
 import Login from '@/features/Autenticacao/index.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import Produtos from '@/views/Produtos.vue'
-import store from '@/store/store.js'
+import store from '@/store'
 
 Vue.use(Router)
 
