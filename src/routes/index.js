@@ -4,11 +4,12 @@ import Template from '@/views/Template.vue'
 import Login from '@/features/Autenticacao/index.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import Produtos from '@/views/Produtos.vue'
+import store from '@/store/store.js'
 
 Vue.use(Router)
 
  const router = new Router({
-	mode: 'hash',
+	mode: 'history',
 	routes: [
 		// { path: '*', component: NotFound },
 		{ path: '/login', component: Login, meta: {auth: false} },
@@ -23,6 +24,21 @@ Vue.use(Router)
 			]
       }
 	]
+})
+
+router.beforeEach((to, from, next) => {
+	if(to.meta.auth){
+		if(store.state.token){
+			next()
+		}
+		else{
+			next('login')
+		}
+	}
+	else{
+		next()
+	}
+	
 })
 export default router
 

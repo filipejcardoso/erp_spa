@@ -8,7 +8,7 @@
 
         <li><router-link to="/dashboard"><i class="material-icons left">timeline</i>Dashboard</router-link></li>
         <li><router-link to="/produtos"><i class="material-icons left">receipt</i>Produtos</router-link></li>
-        <li><router-link to="/login"><i class="material-icons left">exit_to_app</i>Sair</router-link></li>
+        <li v-on:click="sair"><router-link to="/login"><i class="material-icons left">exit_to_app</i>Sair</router-link></li>
 
       </ul>
       
@@ -41,6 +41,9 @@ export default {
   methods: {
     esconder: function (event) {
         $('.sidenav').sidenav('close')
+    },
+    sair: function(event){
+        this.$store.commit('CHANGE_TOKEN', '')
     }
   },
   created()
