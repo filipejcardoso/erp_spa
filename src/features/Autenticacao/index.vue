@@ -22,14 +22,14 @@
 
                         <div class='row'>
                         <div class='input-field col s12'>
-                            <input class='validate'  type='text' name='username' id='username' />
+                            <input class='validate' v-model="user.username" v-on:keyup.13="login()"  type='text' name='username' id='username' />
                             <label for='username'>Entre com seu usuário</label>
                         </div>
                         </div>
 
                         <div class='row'>
                         <div class='input-field col s12'>
-                            <input class='validate' type='password' name='password' id='password' />
+                            <input class='validate'  v-model="user.password" v-on:keyup.13="login()" type='password' name='password' id='password' />
                             <label for='password'>Entre com sua senha</label>
                         </div>
                         <label style='float: right;'>
@@ -40,7 +40,7 @@
                         <br />
                         <center>
                         <div class='row'>
-                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+                            <button type='submit' v-on:click="login()" name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
                         </div>
                         </center>
                     </div>
@@ -60,11 +60,24 @@
 <script>
 import {mapState, mapActions} from 'vuex'
 export default {
+  data () {
+    return {
+      user:{
+        username:'',
+        password:''
+      }
+    }
+  },
   mounted(){
-    this.setToken()
   },
   methods: {
-    ...mapActions('Autenticacao',['setToken'])
+    ...mapActions('Autenticacao',['loginAction']),
+    login: async function() {
+        if(await this.loginAction(this.user))
+          this.$router.push('dashboard')
+        else  
+          alert('Usuário ou senha incorreto!')
+    }
   },
   computed : {
     ...mapState('Autenticacao',['token'])

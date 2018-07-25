@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Template from '@/views/Template.vue'
-import Login from '@/features/Autenticacao/index.vue'
-import Dashboard from '@/views/Dashboard.vue'
-import Produtos from '@/views/Produtos.vue'
 import store from '@/store'
+import Template from '@/views/Template.vue'
+import Dashboard from '@/views/Dashboard.vue'
+import Login from '@/features/Autenticacao/index.vue'
+import Produtos from '@/features/Produtos/index.vue'
 
 Vue.use(Router)
 
@@ -28,7 +28,7 @@ Vue.use(Router)
 
 router.beforeEach((to, from, next) => {
 	if(to.meta.auth){
-		if(store.state.token){
+		if(store.state.Autenticacao.token){
 			next()
 		}
 		else{

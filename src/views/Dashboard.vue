@@ -11,31 +11,6 @@
 </template>
 
 <script>
-export default {
-  data()
-  {
-    return{
-      produtos: []
-    }
-  },
-  methods: {
-    loadProdutos(){
-      const url = `${process.env.API_URL}/produtos`;
-      const header = {Authorization:`Bearer ${this.$store.state.token}`}
-
-      this.axios.get(url,{ headers: header })
-      .then(response => {
-
-        this.produtos = response.data['records'];
-      })
-      .catch(e => {
-      })
-    },
-   },
-  created(){
-      this.loadProdutos();
-  }
-}
 </script>
 
 

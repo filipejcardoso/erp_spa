@@ -2,11 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VuexPersist from 'vuex-persist';
 import Autenticacao from '@/features/Autenticacao/store'
+import Produtos from '@/features/Produtos/store'
 
 Vue.use(Vuex)
 
 const modules = {
-    Autenticacao
+    Autenticacao,
+    Produtos
 }
 
 const vuexLocalStorage = new VuexPersist({

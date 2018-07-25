@@ -8,7 +8,7 @@
 
         <li><router-link to="/dashboard"><i class="material-icons left">timeline</i>Dashboard</router-link></li>
         <li><router-link to="/produtos"><i class="material-icons left">receipt</i>Produtos</router-link></li>
-        <li v-on:click="sair"><router-link to="/login"><i class="material-icons left">exit_to_app</i>Sair</router-link></li>
+        <li v-on:click="logout"><router-link to="/produtos"><i class="material-icons left">exit_to_app</i>Sair</router-link></li>
 
       </ul>
       
@@ -24,7 +24,7 @@
                     <i class="material-icons">receipt</i>Produtos
                   </router-link>
                 </li>
-                <li v-on:click="esconder">
+                <li v-on:click="logout">
                   <router-link class="waves-effect waves-cyan" to="/login">
                     <i class="material-icons">exit_to_app</i>Sair
                   </router-link>
@@ -37,13 +37,17 @@
 </template>
 
 <script>
+import {mapState, mapActions} from 'vuex'
 export default {
   methods: {
-    esconder: function (event) {
+    ...mapActions('Autenticacao',['logoutAction']),
+    logout: async function() {
+        await this.logoutAction()
+        this.$router.push('login')
         $('.sidenav').sidenav('close')
     },
-    sair: function(event){
-        this.$store.commit('CHANGE_TOKEN', '')
+    esconder: function (event) {
+        $('.sidenav').sidenav('close')
     }
   },
   created()
