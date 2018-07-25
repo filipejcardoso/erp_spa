@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Template from '@/views/Template.vue'
-import Login from '@/views/Login.vue'
+import Login from '@/features/Autenticacao/index.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import Produtos from '@/views/Produtos.vue'
 
@@ -25,4 +25,5 @@ Vue.use(Router)
 	]
 })
 export default router
+
 Vue.router = router
