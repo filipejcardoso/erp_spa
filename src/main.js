@@ -10,6 +10,8 @@ import router from './routes'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
 //==============COMPONENENTS================
 import Navbar from './components/Navbar.vue'
@@ -17,9 +19,10 @@ import Navbar from './components/Navbar.vue'
 //=============DEPENDENCIAS==================
 Vue.use(Materialize)
 Vue.use(VueAxios, axios);
+Vue.use(Vuetify)
 
 //==============COMPONENENTS================
-Vue.component('navbar',Navbar);
+//Vue.component('navbar',Navbar);
 
 Vue.config.productionTip = false
 axios.defaults.baseURL = process.env.API_URL
